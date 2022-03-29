@@ -1,0 +1,6 @@
+name: MetaCraftingAPI
+version: '${version}'
+main: com.gmail.necnionch.myplugin.metacraftingapi.bukkit.MetaCraftingPlugin
+api-version: 1.14
+authors: [ Necnion8 ]
+description: Meta-ble ItemStack Crafting API
