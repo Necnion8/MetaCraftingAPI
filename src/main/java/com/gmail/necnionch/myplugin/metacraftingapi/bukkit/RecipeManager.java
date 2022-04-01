@@ -336,7 +336,7 @@ public class RecipeManager extends MetaCraftingAPI implements Listener {
 
     @Override
     protected void unregisterCustomRecipeImpl(CustomRecipe customRecipe) {
-        boolean removed = true;
+        boolean removed = false;
         if (recipeByKey.containsValue(customRecipe))
             removed = recipeByKey.entrySet().removeIf(e -> e.getValue().equals(customRecipe));
         if (recipesByPlugin.containsValue(customRecipe)) {
