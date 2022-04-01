@@ -12,6 +12,7 @@ import org.bukkit.persistence.PersistentDataType;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 public class DummyShapedRecipe extends ShapedRecipe {
@@ -21,6 +22,22 @@ public class DummyShapedRecipe extends ShapedRecipe {
         super(key, createDummyItem());
     }
 
+    public static DummyShapedRecipe fromRecipe(CustomRecipe recipe) {
+        String key = Arrays.stream(recipe.getShapedIngredients())
+                .map(rows -> Arrays.stream(rows)
+                        .map(i -> i.getRecipeMaterial().getKey().getKey())
+                        .collect(Collectors.joining("-")))
+                .collect(Collectors.joining("_"));
+
+        DummyShapedRecipe dummy = new DummyShapedRecipe(new NamespacedKey(MetaCraftingPlugin.getInstance(), "dummy_" + key));
+
+        dummy.shape(recipe.getShape());
+        recipe.ingredients().forEach((c, i) -> dummy.setIngredient(c, i.getRecipeMaterial()));
+
+        return dummy;
+    }
+
+    @Deprecated
     public static DummyShapedRecipe fromRecipe(CustomRecipe recipe, NamespacedKey recipeKey) {
         DummyShapedRecipe dummy = new DummyShapedRecipe(recipeKey);
 

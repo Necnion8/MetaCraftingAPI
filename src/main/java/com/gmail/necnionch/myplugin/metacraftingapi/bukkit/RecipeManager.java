@@ -133,7 +133,7 @@ public class RecipeManager extends MetaCraftingAPI implements Listener {
         DummyShapedRecipe dummyRecipe = findMatchIngredientDummyRecipe(recipe);
         if (dummyRecipe == null) {
             NamespacedKey dummyKey = new NamespacedKey(plugin, UUID.randomUUID().toString());
-            dummyRecipe = DummyShapedRecipe.fromRecipe(recipe, dummyKey);
+            dummyRecipe = DummyShapedRecipe.fromRecipe(recipe);
             Bukkit.addRecipe(dummyRecipe);
             dummyShapedRecipes.put(dummyKey, dummyRecipe);
         }
