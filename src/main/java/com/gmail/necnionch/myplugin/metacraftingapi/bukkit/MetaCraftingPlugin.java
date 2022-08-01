@@ -1,5 +1,7 @@
 package com.gmail.necnionch.myplugin.metacraftingapi.bukkit;
 
+import com.gmail.necnionch.myplugin.metacraftingapi.bukkit.listeners.AnvilListener;
+import com.gmail.necnionch.myplugin.metacraftingapi.bukkit.listeners.SmithingListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.lang.reflect.Field;
@@ -23,6 +25,15 @@ public final class MetaCraftingPlugin extends JavaPlugin {
         }
 
         getServer().getPluginManager().registerEvents(api, this);
+        getServer().getPluginManager().registerEvents(new AnvilListener(this), this);
+
+        try {
+            Class.forName("org.bukkit.event.inventory.PrepareSmithingEvent");
+            getServer().getPluginManager().registerEvents(new SmithingListener(this), this);
+        } catch (ClassNotFoundException ignored) {
+            // 1.15 and older
+        }
+
     }
 
     @Override

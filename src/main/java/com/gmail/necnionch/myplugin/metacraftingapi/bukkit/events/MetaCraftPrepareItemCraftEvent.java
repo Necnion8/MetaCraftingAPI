@@ -76,4 +76,8 @@ public class MetaCraftPrepareItemCraftEvent extends Event implements Cancellable
         return HANDLERS;
     }
 
+    public static HandlerList getHandlerList() {
+        return HANDLERS;
+    }
+
 }
